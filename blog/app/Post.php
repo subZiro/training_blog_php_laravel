@@ -163,8 +163,8 @@ class Post extends Model
     public function setDateAttribute($value)
     {
         // изменение формата даты для записи в бд
-        $date = Carbon::createFromFormat('d/m/y', $value)->format('Y-m-d');
-        $this->attributes['date'] = $date;
+        $date = Carbon::createFromFormat('dd/mm/yyyy', $value)->format('Y-m-d');
+        $this->attribute['date'] = $date; // не записывает в базу
     }
 
     public function getDateAttribute($value)
@@ -174,6 +174,7 @@ class Post extends Model
         return $date;
     }
 */
+
 
     public function getCategoryTitle()
     {

@@ -440,7 +440,8 @@
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true,
-      format: 'yyyy-mm-dd'
+      format: 'yyyy-mm-dd'  // не красивый вывод формата даты
+      //format: 'dd/mm/yyyy'
     });
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

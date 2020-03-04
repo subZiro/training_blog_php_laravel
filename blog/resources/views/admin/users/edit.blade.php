@@ -1,11 +1,6 @@
 @extends('admin.layout')
 
 @section('content')
-
-@extends('admin.layout')
-
-@section('content')
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -23,7 +18,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Добавляем пользователя</h3>
+          <h3 class="box-title">Обновить данные пользователя</h3>
           @include('admin.errors')
         </div>
         <div class="box-body">
@@ -51,6 +46,7 @@
       </div>
         <!-- /.box-body -->
         <div class="box-footer">
+          <a href="{{route('users.index')}}" class="btn btn-default">Назад</a>
           <button class="btn btn-warning pull-right">Изменить</button>
         </div>
         <!-- /.box-footer-->
@@ -61,6 +57,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-@endsection
-
 @endsection

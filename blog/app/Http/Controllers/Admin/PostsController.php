@@ -65,17 +65,6 @@ class PostsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -83,7 +72,18 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // изменение поста
+        $post = Post::find($id);
+        // загрузга категорий и тегов из бд
+        $tags = Tag::pluck('title', 'id')->all();
+        $categories = Category::pluck('title', 'id')->all();
+        $selectedTags = $post->tags->pluck('id')->all();
+
+        return view('admin.posts.edit', compact(
+            'post', 
+            'categories',
+            'selectedTags',
+            'tags'));
     }
 
     /**
@@ -95,7 +95,23 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // приминение изменений поста
+                $this->validate($request, [
+            'title' => 'required',  //обязательный поля к заполнению
+            'content' => 'required',
+            'date' => 'required',
+            'image' => 'image|nullable',   // поле image изображение или пустое
+        ]);
+
+        $post = Post::find($id);
+        $post->edit($request->all());
+        $post->uploadImage($request->file('image'));
+        $post->setCategory($request->get('category_id'));
+        $post->setTags($request->get('tags'));
+        $post->toggleStatus($request->get('status'));
+        $post->toggleFeatured($request->get('is_featured'));
+
+        return redirect()->route('posts.index');   
     }
 
     /**
@@ -106,6 +122,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // удаление поста
+        $post = Post::find($id)->remove();
+
+        return redirect()->route('posts.index');   
     }
 }
