@@ -11,9 +11,17 @@
 |
 */
 
+//страница блога
 Route::get('/', 'HomeController@index');
 
+// страница поста
 Route::get('/post/{slug}', 'HomeController@show')->name('post.show');
+
+// страница выборки постов по тегам
+Route::get('/tag/{slug}', 'HomeController@tag')->name('tag.show');
+
+// страница выборки постов по категориям
+Route::get('/category/{slug}', 'HomeController@category')->name('category.show');
 
 // группировка роутов для admin, сокращение префиксов и неймспейсов
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
