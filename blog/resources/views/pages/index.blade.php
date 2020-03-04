@@ -44,7 +44,7 @@
                     @endforeach
                     {{$posts->links()}}
                 </div>
-                include('pages._rightSidebar')
+                @include('pages._rightSidebar')
             </div>
         </div>
     </div>

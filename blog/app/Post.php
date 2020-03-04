@@ -196,5 +196,54 @@ class Post extends Model
         return 'нет Тегов';
     }
 
+    public function getStringDate()
+    {
+        // даты форматированной строкой
+        $date = Carbon::createFromFormat('Y-m-d', $this->date)->format('d F, Y');
+        return $date;
+    }
+
+    public function hasPrevPost()
+    {
+        // проверка существует ли предыдущий пост
+        return self::where('id', '<', $this->id)->max('id');
+    }
+
+    public function getPrevPost()
+    {
+        // получение предэдущего поста
+        $postId = $this->hasPrevPost();  // id
+        return self::find($postId);
+    }
+
+
+    public function hasNextPost()
+    {
+        // проверка существует ли следущий пост
+        return self::where('id', '>', $this->id)->min('id');
+    }
+
+    public function getNextPost()
+    {
+        // получение следующего поста
+        $postId = $this->hasNextPost();  // id
+        return self::find($postId);
+    }
+
+    public function related()
+    {
+        // карусель постов. возвращает все посты кроме текущего
+        return self::all()->except($this->id);
+    }
+
+    public function hasCategory()
+    {
+        // есть ли у поста категория
+        if($this->category != null) {return true;} 
+
+        return false;
+    }
+
+
 }
 
