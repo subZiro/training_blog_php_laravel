@@ -65,4 +65,4 @@ mix.scripts([
 ], 'public/js/public.js');
 
 mix.copy('resources/assets/public/fonts', 'public/fonts');
-mix.copy('resources/assets/public/images', 'public/images');
+mix.copy('resources/assets/public/images', 'public/img');
