@@ -48,7 +48,7 @@ class PostsController extends Controller
         // загрузка в бд
         // валидация загрузки данных
         $this->validate($request, [
-            'title' => 'required',  //обязательный поля к заполнению
+            'title' => 'required',  // обязательные поля к заполнению
             'content' => 'required',
             'date' => 'required',
             'image' => 'image|nullable',   // поле image изображение или пустое
@@ -77,6 +77,7 @@ class PostsController extends Controller
         // загрузга категорий и тегов из бд
         $tags = Tag::pluck('title', 'id')->all();
         $categories = Category::pluck('title', 'id')->all();
+        // получение тегов редактируемого поста
         $selectedTags = $post->tags->pluck('id')->all();
 
         return view('admin.posts.edit', compact(
@@ -97,7 +98,7 @@ class PostsController extends Controller
     {
         // приминение изменений поста
                 $this->validate($request, [
-            'title' => 'required',  //обязательный поля к заполнению
+            'title' => 'required',  // обязательные поля к заполнению
             'content' => 'required',
             'date' => 'required',
             'image' => 'image|nullable',   // поле image изображение или пустое
