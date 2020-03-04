@@ -13,7 +13,9 @@
 
 Route::get('/', 'HomeController@index');
 
-// группировка роутов, сокращение префиксов и неймспейсов
+Route::get('/post/{slug}', 'HomeController@show')->name('post.show');
+
+// группировка роутов для admin, сокращение префиксов и неймспейсов
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
 	Route::get('/', 'DashboardController@index');
 	Route::resource('/categories', 'CategoriesController');
