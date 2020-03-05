@@ -23,11 +23,28 @@ Route::get('/tag/{slug}', 'HomeController@tag')->name('tag.show');
 // страница выборки постов по категориям
 Route::get('/category/{slug}', 'HomeController@category')->name('category.show');
 
-// регистрация пользователя
-Route::get('/register', )
+Route::group(['middleware' => 'guest'], function(){
+	// форма регистрации пользователя
+	Route::get('/registration', 'AuthController@registrationForm');
+	// регистрация пользователя
+	Route::post('/registration', 'AuthController@registration');
+	// форма входа 
+	Route::get('/login', 'AuthController@loginForm')->name('login');
+	// вход
+	Route::post('/login', 'AuthController@login');
+});
+
+Route::group(['middleware' => 'auth'], function(){
+	// выход
+	Route::get('/logout', 'AuthController@logout');
+	// форма профиля
+	Route::get('/profile', 'ProfileController@index');
+	// изменение данных фрофиля
+	Route::post('/profile', 'ProfileController@store');
+});
 
 // группировка роутов для admin, сокращение префиксов и неймспейсов
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function(){
 	Route::get('/', 'DashboardController@index');
 	Route::resource('/categories', 'CategoriesController');
 	Route::resource('/tags', 'TagsController');
