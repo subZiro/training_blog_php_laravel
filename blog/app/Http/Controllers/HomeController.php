@@ -19,23 +19,9 @@ class HomeController extends Controller
     {
     	// главная страница блога
         $posts = Post::paginate(5);
-        // получение 2 популяных постов
-        $popularPosts = Post::orderBy('views', 'desc')->take(2)->get();
-        // получение 3 рекомендованных постов
-        $featuredPosts = Post::where('is_featured', 1)->take(3)->get();
-        // получение новых постов
-        $newPosts = Post::orderBy('date', 'desc')->take(4)->get();
-        // получение всех категорий
-        $categories = Category::all();
       
 
-        return view('pages.index', [
-            'posts'=>$posts,
-            'popularPosts'=>$popularPosts,
-            'featuredPosts'=>$featuredPosts,
-            'newPosts'=>$newPosts,
-            'categories'=>$categories
-        ]);
+        return view('pages.index')->with('posts', $posts);
     }
 
     public function show($slug)

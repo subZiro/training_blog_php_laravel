@@ -23,6 +23,9 @@ Route::get('/tag/{slug}', 'HomeController@tag')->name('tag.show');
 // страница выборки постов по категориям
 Route::get('/category/{slug}', 'HomeController@category')->name('category.show');
 
+// регистрация пользователя
+Route::get('/register', )
+
 // группировка роутов для admin, сокращение префиксов и неймспейсов
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function(){
 	Route::get('/', 'DashboardController@index');

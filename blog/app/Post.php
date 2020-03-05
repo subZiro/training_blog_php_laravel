@@ -244,6 +244,26 @@ class Post extends Model
         return false;
     }
 
+    public static function getPopularposts()
+    {
+        // получение 2 популяных постов
+        return self::orderBy('views', 'desc')->take(2)->get();
+    }
+
+    public static function getFeaturedPosts()
+    {
+        // получение 3 рекомендованных постов
+        return self::where('is_featured', 1)->take(3)->get();
+    }
+
+    public static function getNewPosts()
+    {
+        // получение новых постов
+        return self::orderBy('date', 'desc')->take(4)->get();
+    }
+
+
+
+
 
 }
-

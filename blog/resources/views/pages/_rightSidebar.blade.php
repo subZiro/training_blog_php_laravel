@@ -28,10 +28,10 @@
                 @foreach($featuredPosts as $post)
                     <div class="item">
                         <div class="feature-content">
-                            <img src="img/p1.jpg" alt="">
-                            <a href="#" class="overlay-text text-center">
-                                <h5 class="text-uppercase">Home is peaceful</h5>
-                                <p>Lorem ipsum dolor sit ametsetetur sadipscing elitr, sed </p>
+                            <img src="{{$post->getImage()}}" alt="">
+                            <a href="{{route('post.show', $post->slug)}}" class="overlay-text text-center">
+                                <h5 class="text-uppercase">{{$post->title}}</h5>
+                                <p>{{$post->description}}</p>
                             </a>
                         </div>
                     </div>
@@ -40,85 +40,30 @@
         <aside class="widget pos-padding">
             <h3 class="widget-title text-uppercase text-center">Recent Posts</h3>
             <div class="thumb-latest-posts">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#" class="popular-img"><img src="img/r-p.jpg" alt="">
-                            <div class="p-overlay"></div>
-                        </a>
+                @foreach($newPosts as $post)
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="{{route('post.show', $post->slug)}}" class="popular-img"><img src="{{$post->getImage()}}" alt="">
+                                <div class="p-overlay"></div>
+                            </a>
+                        </div>
+                        <div class="p-content">
+                            <a href="#" class="text-uppercase">{{$post->title}}</a>
+                            <span class="p-date">{{$post->getStringDate()}}</span>
+                        </div>
                     </div>
-                    <div class="p-content">
-                        <a href="#" class="text-uppercase">Home is peaceful Place</a>
-                        <span class="p-date">February 15, 2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="thumb-latest-posts">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#" class="popular-img"><img src="img/r-p.jpg" alt="">
-                            <div class="p-overlay"></div>
-                        </a>
-                    </div>
-                    <div class="p-content">
-                        <a href="#" class="text-uppercase">Home is peaceful Place</a>
-                        <span class="p-date">February 15, 2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="thumb-latest-posts">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#" class="popular-img"><img src="img/r-p.jpg" alt="">
-                            <div class="p-overlay"></div>
-                        </a>
-                    </div>
-                    <div class="p-content">
-                        <a href="#" class="text-uppercase">Home is peaceful Place</a>
-                        <span class="p-date">February 15, 2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="thumb-latest-posts">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#" class="popular-img"><img src="img/r-p.jpg" alt="">
-                            <div class="p-overlay"></div>
-                        </a>
-                    </div>
-                    <div class="p-content">
-                        <a href="#" class="text-uppercase">Home is peaceful Place</a>
-                        <span class="p-date">February 15, 2016</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </aside>
         <aside class="widget border pos-padding">
             <h3 class="widget-title text-uppercase text-center">Categories</h3>
             <ul>
-                <li>
-                    <a href="#">Food & Drinks</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
-                <li>
-                    <a href="#">Travel</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
-                <li>
-                    <a href="#">Business</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
-                <li>
-                    <a href="#">Story</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
-                <li>
-                    <a href="#">DIY & Tips</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
-                <li>
-                    <a href="#">Lifestyle</a>
-                    <span class="post-count pull-right"> (2)</span>
-                </li>
+                @foreach($categories as $category)
+                    <li>
+                        <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
+                        <span class="post-count pull-right">{{$category->posts()->count()}}</span>
+                    </li>
+                @endforeach
             </ul>
         </aside>
     </div>
