@@ -65,14 +65,16 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function generatePassword($password)
+    public function generatePassword($password, $oldpassword)
     {
-        // метод для шифрования пароля
-        if($password != null)
+        // метод для шифрования нового пароля или сохранение старого
+        if($password == null)
         {
+            $this->password = $oldpassword;
+        } else {
             $this->password = bcrypt($password);
-            $this->save();
         }
+        $this->save();
     }
 
     public function remove()
