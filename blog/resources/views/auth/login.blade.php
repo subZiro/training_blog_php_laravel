@@ -6,13 +6,8 @@
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-md-8">
-
-	                <div class="leave-comment mr0"><!--leave comment-->
-	                    @if(session('status'))
-	                    	<dev class="alert alert-danger">
-	                    		{{session('status')}}
-	                    	</dev>
-	                    @endif
+	            	<!--leave comment-->
+	                <div class="leave-comment mr0">
 	                    <h3 class="text-uppercase">Login</h3>
 	                    @include('admin.errors')
 	                    <br>
