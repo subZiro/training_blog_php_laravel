@@ -35,6 +35,11 @@ class Post extends Model
     	);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function sluggable()
     {
         return [
@@ -260,6 +265,12 @@ class Post extends Model
     {
         // получение новых постов
         return self::orderBy('date', 'desc')->take(4)->get();
+    }
+
+    public function getComments()
+    {
+        // получение комментариев со статусом 1
+        return $this->comments()->where('status', 1)->get();
     }
 
 
