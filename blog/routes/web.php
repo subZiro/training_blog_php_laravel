@@ -23,6 +23,11 @@ Route::get('/tag/{slug}', 'HomeController@tag')->name('tag.show');
 // страница выборки постов по категориям
 Route::get('/category/{slug}', 'HomeController@category')->name('category.show');
 
+// подписка
+Route::post('/subscribe', 'SubController@subscribe');
+Route::get('/verificate/{token}', 'SubController@verificate');
+
+
 Route::group(['middleware' => 'guest'], function(){
 	// форма регистрации пользователя
 	Route::get('/registration', 'AuthController@registrationForm');
@@ -52,9 +57,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 	Route::resource('/tags', 'TagsController');
 	Route::resource('/users', 'UsersController');
 	Route::resource('/subs', 'SubscribersController');
+	Route::resource('/posts', 'PostsController');
 	Route::get('/comments', 'CommentsController@index');
 	Route::get('/comments/toggle/{id}', 'CommentsController@toggle');
 	Route::delete('/comments/{id}/destroy', 'CommentsController@destroy')->name('comments.destroy');
-	Route::resource('/posts', 'PostsController');
 });
 

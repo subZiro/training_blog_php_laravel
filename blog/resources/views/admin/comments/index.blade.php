@@ -23,9 +23,6 @@
 		        </div>
 		        <!-- /.box-header -->
 		        <div class="box-body">
-	          		<div class="form-group">
-		            	<a href="create.html" class="btn btn-success">Добавить</a>
-	          		</div>
 	          		<table id="example1" class="table table-bordered table-striped">
 		            	<thead>
 				            <tr>
@@ -51,7 +48,7 @@
 			              					<a href="/admin/comments/toggle/{{$comment->id}}" class="fa fa-thumbs-o-up"></a>
 			              				@endif
 										{{Form::open(['route'=>['comments.destroy', $comment->id], 'method'=>'delete'])}}
-											<button onclick="return confirm('are you sure?')" type="submit" class="delete">
+											<button onclick="return confirm('Удалить комментарий?')" type="submit" class="delete">
 												<i class="fa fa-remove"></i>
 											</button>
 										{{Form::close()}}

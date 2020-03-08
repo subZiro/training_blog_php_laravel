@@ -9,7 +9,7 @@ class Subscribe extends Model
     public static function add($email)
     {
     	// добавить подписчика
-    	$sub-> new static;
+    	$sub = new static;
     	$sub->email = $email;
     	$sub->token = str_random(100);
     	$sub->save();
