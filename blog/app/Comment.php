@@ -2,18 +2,19 @@
 
 namespace App;
 
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
     public function post()
     {
-    	return $this->hasOne(Post::class);
+    	return $this->beLongsTo(Post::class);
     }
 
     public function author()
     {
-    	return $this->hasOne(User::class);
+    	return $this->beLongsTo(User::class, 'user_id');
     }
 
     public function allow()
@@ -40,7 +41,7 @@ class Comment extends Model
     	return $this->dissAllow();
     }
 
-    public function remive()
+    public function remove()
     {
     	// удаление комментария
     	$this->delete();
