@@ -6,9 +6,8 @@
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-md-8">
-
-	                <div class="leave-comment mr0"><!--leave comment-->
-	                    
+					<!--leave comment--> 
+	                <div class="leave-comment mr0">
 	                    <h3 class="text-uppercase">Register</h3>
 	                    @include('admin.errors')
 	                    <br>
@@ -34,7 +33,8 @@
 	                        <button type="submit" class="btn send-btn">Register</button>
 
 	                    </form>
-	                </div><!--end leave comment-->
+	                </div>
+	                <!--end leave comment-->
 	            </div>
 	            @include('pages._rightSidebar')
 	        </div>
