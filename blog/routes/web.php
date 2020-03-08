@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/profile', 'ProfileController@index');
 	// изменение данных фрофиля
 	Route::post('/profile', 'ProfileController@store');
+	// комментарий пользователя
+	Route::post('/comment', 'CommentsController@store');
 });
 
 // группировка роутов для admin, сокращение префиксов и неймспейсов
@@ -50,7 +52,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 	Route::resource('/tags', 'TagsController');
 	Route::resource('/users', 'UsersController');
 	Route::resource('/subs', 'SubscribersController');
-	Route::resource('/comments', 'CommentsController');
+	Route::get('/comments', 'CommentsController@index');
+	Route::get('/comments/toggle/{id}', 'CommentsController@toggle');
+	Route::delete('/comments/{id}/destroy', 'CommentsController@destroy')->name('comments.destroy');
 	Route::resource('/posts', 'PostsController');
 });
 
