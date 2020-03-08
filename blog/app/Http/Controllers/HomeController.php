@@ -19,8 +19,6 @@ class HomeController extends Controller
     {
     	// главная страница блога
         $posts = Post::paginate(5);
-      
-
         return view('pages.index')->with('posts', $posts);
     }
 
@@ -38,7 +36,6 @@ class HomeController extends Controller
         // вывод постов со статусом=1, количество постов на странице 3
         //$posts = $tag->posts()->where('status', 1)->paginate(4);
         $posts = $tag->posts()->paginate(4);
-
         return view('pages.list', ['posts'=>$posts]);
     }
 
@@ -47,7 +44,6 @@ class HomeController extends Controller
         // выборка постов по категории
         $category = Category::where('slug', $slug)->firstOrFail();
         $posts = $category->posts()->paginate(4);
-
         return view('pages.list', ['posts'=>$posts]);
     }
 }

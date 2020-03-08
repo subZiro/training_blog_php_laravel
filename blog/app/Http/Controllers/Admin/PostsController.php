@@ -79,7 +79,6 @@ class PostsController extends Controller
         $categories = Category::pluck('title', 'id')->all();
         // получение тегов редактируемого поста
         $selectedTags = $post->tags->pluck('id')->all();
-
         return view('admin.posts.edit', compact(
             'post', 
             'categories',
@@ -103,7 +102,6 @@ class PostsController extends Controller
             'date' => 'required',
             'image' => 'image|nullable',   // поле image изображение или пустое
         ]);
-
         $post = Post::find($id);
         $post->edit($request->all());
         $post->uploadImage($request->file('image'));
@@ -125,7 +123,6 @@ class PostsController extends Controller
     {
         // удаление поста
         $post = Post::find($id)->remove();
-
         return redirect()->route('posts.index');   
     }
 }

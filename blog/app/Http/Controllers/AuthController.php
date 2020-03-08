@@ -26,7 +26,6 @@ class AuthController extends Controller
 		// создание пользователя в бд
 		$user = User::add($request->all());
         $user->generatePassword($request->get('password'));
-
         return redirect('/login');
 
     }
@@ -61,7 +60,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/login');
     }
-    
 
 }
 

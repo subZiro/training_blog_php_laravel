@@ -31,11 +31,10 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 		$oldpassword = $user->password;
-
         $user->uploadAvatar($request->file('avatar'));  //upload avatar
         $user->edit($request->all()); //name,email
         $user->generatePassword($request->get('password'), $oldpassword);
-
+        
         return redirect()->back()->with('status', 'Данные успешно обновлены!'); 
     }
 }

@@ -17,9 +17,9 @@ class SubscribersController extends Controller
 
     public function destroy($id)
     {   
-        // удаление тега 
+        // удаление подписки
         $tags = Subscribe::find($id)->delete();
-        return redirect()->route('subs.index');  // возврат к тегам
+        return redirect()->route('subs.index');
     }
 
     

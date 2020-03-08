@@ -12,7 +12,6 @@ class CategoriesController extends Controller
     {   
         // открытие страницы индекс в категориях
     	$categories = Category::all();
-
     	return view('admin.categories.index', ['categories' => $categories]);
     }
 

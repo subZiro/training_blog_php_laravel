@@ -164,23 +164,6 @@ class Post extends Model
         return $this->setFeatured();
     }
 
-/*
-    public function setDateAttribute($value)
-    {
-        // изменение формата даты для записи в бд
-        $date = Carbon::createFromFormat('dd/mm/yyyy', $value)->format('Y-m-d');
-        $this->attribute['date'] = $date; // не записывает в базу
-    }
-
-    public function getDateAttribute($value)
-    {
-        // изменение формата даты для вывода
-        $date = Carbon::createFromFormat('Y-m-d', $value)->format('d/m/y');
-        return $date;
-    }
-*/
-
-
     public function getCategoryTitle()
     {
         // получение категории поста
@@ -272,9 +255,4 @@ class Post extends Model
         // получение комментариев со статусом 1
         return $this->comments()->where('status', 1)->get();
     }
-
-
-
-
-
 }

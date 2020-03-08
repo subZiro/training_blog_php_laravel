@@ -16,7 +16,6 @@ class SubController extends Controller
 
     	$sub = Subscribe::add($request->get('email'));
     	\Mail::to($sub)->send(new SubEmail($sub));
-
     	return redirect()->back()->with('status','Проверьте вашу почту!');
     }
 

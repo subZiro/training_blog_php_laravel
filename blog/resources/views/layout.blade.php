@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- favicon icon -->
-
     <title>Blog</title>
-
     <!-- common css -->
     <link rel="stylesheet" href="/css/public.css">
-
     <!-- HTML5 shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.js"></script>
@@ -20,11 +16,9 @@
 
     <!-- Favicon -->
     <link rel="icon" type="img/png" href="img/favicon.png">
-
 </head>
 
 <body>
-
 <nav class="navbar main-menu navbar-default">
     <div class="container">
         <div class="menu-content">
@@ -46,7 +40,7 @@
                 <ul class="nav navbar-nav text-uppercase">
                     <li><a href="/">Homepage</a></li>
                     <li><a href="about-me.html">ABOUT ME </a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="#footer-widget-section">CONTACT</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav text-uppercase pull-right">
@@ -126,7 +120,7 @@
     </div>
 </div>
 
-<footer class="footer-widget-section">
+<footer class="footer-widget-section" id="footer-widget-section">
     <div class="container">
         <div class="row">
             <div class="col-md-4">

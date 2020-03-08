@@ -47,10 +47,8 @@ class UsersController extends Controller
             'avatar' => 'image|nullable',  // поле avatar изображение или пустое
             'email' => 'required|email|unique:users'  // поле email валидация на email уникальность по пользователям
         ]);
-
         $user = User::add($request->all());
         $user->uploadAvatar($request->file('avatar'));
-
         return redirect()->route('users.index');  // возврат к странице со всеми пользователми
         
     }
@@ -80,7 +78,6 @@ class UsersController extends Controller
     {
         // редактирование пользователя
         $user = User::find($id);
-
         $this->validate($request, [
             'name' => 'required',
             'avatar' => 'nullable|image',
@@ -91,8 +88,9 @@ class UsersController extends Controller
             ]
         ]);
 
+        $oldpassword = $user->password;
         $user->edit($request->all()); //name,email
-        $user->generatePassword($request->get('password'));
+        $user->generatePassword($request->get('password'), $oldpassword);
         $user->uploadAvatar($request->file('avatar'));  //upload avatar
 
         return redirect()->route('users.index');

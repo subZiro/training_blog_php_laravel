@@ -29,7 +29,6 @@ class CommentsController extends Controller
         // изменение статуса комментария (одобрен/запрещен)
         $comment = Comment::find($id);
         $comment->toggleStatus();
-
         return redirect()->back();
     }
 

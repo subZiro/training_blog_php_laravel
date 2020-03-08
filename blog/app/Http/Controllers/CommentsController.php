@@ -20,9 +20,7 @@ class CommentsController extends Controller
     	$comment->text = $request->get('message');
     	$comment->user_id = Auth::user()->id;
     	$comment->post_id = $request->get('post_id');
-
     	$comment->save();
-    	
     	return redirect()->back()->with('status', 'Ваш комментарий скоро будет добавлен');
     }
 }
