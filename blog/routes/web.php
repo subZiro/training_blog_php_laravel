@@ -27,7 +27,6 @@ Route::get('/category/{slug}', 'HomeController@category')->name('category.show')
 Route::post('/subscribe', 'SubController@subscribe');
 Route::get('/verificate/{token}', 'SubController@verificate');
 
-
 Route::group(['middleware' => 'guest'], function(){
 	// форма регистрации пользователя
 	Route::get('/registration', 'AuthController@registrationForm');

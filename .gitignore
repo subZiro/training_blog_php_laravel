@@ -21,3 +21,13 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+blog/app/.DS_Store
+blog/app/Http/.DS_Store
+blog/app/Http/Controllers/.DS_Store
+blog/app/Http/Controllers/.DS_Store
+blog/app/Http/Controllers/Admin/.DS_Store
+blog/.DS_Store
+blog/.DS_Store
+blog/app/Http/Controllers/.DS_Store
+blog/public/.DS_Store
+blog/public/.DS_Store
