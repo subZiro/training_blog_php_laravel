@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status',
     ];
 
     /**
@@ -68,7 +68,7 @@ class User extends Authenticatable
     public function generatePassword($password, $oldpassword)
     {
         // метод для шифрования нового пароля или сохранение старого
-        if($password == null)
+        if(is_null($password))
         {
             $this->password = $oldpassword;
         } else {
@@ -88,7 +88,7 @@ class User extends Authenticatable
     public function uploadAvatar($image)
     {
         // если аватар загружен сохранение его в папке
-        if($image == null) { return; }
+        if(is_null($image)) { return; }
 
         $this->removeAvatar();
 
@@ -101,7 +101,7 @@ class User extends Authenticatable
     public function removeAvatar()
     {   
         // удаление аватара если он был
-        if($this->avatar != null)
+        if(!is_null($this->avatar))
         {
             Storage::delete('uploads/' . $this->avatar);
         }
@@ -110,7 +110,7 @@ class User extends Authenticatable
     public function getAvatar()
     {
         // вернуть аватар или его замену
-        if($this->avatar == null)
+        if(is_null($this->avatar))
         {
             return '/img/no-user-avatar.png';
         }
@@ -135,7 +135,7 @@ class User extends Authenticatable
     public function toggleAdmin($value)
     {
         // переключатель админ/не админ
-        if($value == nul) {return $this->makeNormal();}
+        if(is_null($value)) {return $this->makeNormal();}
 
         return $this->makeAdmin();
     }
@@ -154,11 +154,20 @@ class User extends Authenticatable
         $this->save();
     }
 
-       public function toggleBan($value)
+    public function toggleBan($value)
     {
         // переключатель бан/не бан
-        if($value == nul) {return $this->unban();}
-
+        if(is_null($value)) {return $this->unban();}
         return $this->ban();
     }
+
+    public function getStatus()
+    {
+        // получение статуса
+        if(is_null($this->status)){
+            return 'Нет статуса';
+        }
+        return $this->status;
+    }
+
 }
