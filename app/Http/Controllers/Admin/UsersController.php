@@ -43,10 +43,11 @@ class UsersController extends Controller
         //метод создания категории (добавление в бд)
         $this->validate($request, [
             'name' => 'required',  // поле name обязательно к заполнению
-            'password' => 'required',  // поле password обязательно к заполнению
             'avatar' => 'image|nullable',  // поле avatar изображение или пустое
-            'email' => 'required|email|unique:users'  // поле email валидация на email уникальность по пользователям
+            'email' => 'required|email|unique:users',  // поле email валидация на email уникальность по пользователям
+            'password' => 'required|string|min:6',  // поле password обязательно к заполнению
         ]);
+        
         $user = User::add($request->all());
         $user->uploadAvatar($request->file('avatar'));
         return redirect()->route('users.index');  // возврат к странице со всеми пользователми
