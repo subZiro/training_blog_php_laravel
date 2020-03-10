@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
@@ -11,9 +12,7 @@ class Post extends Model
 {
     use Sluggable;
 
-    //protected $fillable = ['title', 'content', 'image', 'date', 'description', 'category_id'];
     protected $fillable = ['title','content', 'date', 'description'];
-
 
     public function category()
     {
@@ -49,12 +48,11 @@ class Post extends Model
         ];
     }
 
-
     public static function add($fields)
     {
         $post = new static;
         $post->fill($fields);
-        $post->user_id = 1;
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         return $post;
@@ -76,7 +74,7 @@ class Post extends Model
     public function uploadImage($image)
     {
         // изменение поста
-        if($image == null) {return;}
+        if(is_null($image)) {return;}
         $this->removeImage();
         $filename = str_random(10) . '.' . $image->extension();
         $image->storeAs('uploads', $filename);
@@ -87,7 +85,7 @@ class Post extends Model
     public function getImage()
     {
         // запрос изображения, если отсутствует то вернуть подготовленое
-        if($this->image == null) {return '/img/no-image.png';}
+        if(is_null($this->image)) {return '/img/no-image.png';}
 
         return '/uploads/' . $this->image;
     }
@@ -95,7 +93,7 @@ class Post extends Model
     public function removeImage()
     {
         // удаление изображения
-        if($this->image != null)
+        if(!is_null($this->image))
         {
             Storage::delete('uploads/' . $this->image);
         }
@@ -104,7 +102,7 @@ class Post extends Model
     public function setCategory($id)
     {
         // получить категории из бд
-        if($id == null) {return;}
+        if(is_null($id)) {return;}
 
         $this->category_id = $id;
         $this->save();
@@ -113,7 +111,7 @@ class Post extends Model
     public function setTags($ids)
     {
         // получить теги из бд
-        if($ids == null) {return;}
+        if(is_null($ids)) {return;}
 
         $this->tags()->sync($ids);
     }
@@ -133,7 +131,7 @@ class Post extends Model
     public function toggleStatus($value)
     {
         // переключение статуса поста
-        if($value == null)
+        if(is_null($value))
         {
             return $this->setDraft();
         }
@@ -156,7 +154,7 @@ class Post extends Model
 
     public function toggleFeatured($value)
     {
-        if($value == null)
+        if(is_null($value))
         {
             return $this->setStandart();
         }
@@ -167,7 +165,7 @@ class Post extends Model
     public function getCategoryTitle()
     {
         // получение категории поста
-        if($this->category != null)
+        if(!is_null($this->category))
         {
             return $this->category->title;
         }
@@ -227,7 +225,7 @@ class Post extends Model
     public function hasCategory()
     {
         // есть ли у поста категория
-        if($this->category != null) {return true;} 
+        if(is_null($this->category)) {return true;} 
 
         return false;
     }
@@ -235,19 +233,19 @@ class Post extends Model
     public static function getPopularposts()
     {
         // получение 2 популяных постов
-        return self::orderBy('views', 'desc')->take(2)->get();
+        return self::orderBy('views', 'desc')->where('status', 1)->take(2)->get();
     }
 
     public static function getFeaturedPosts()
     {
         // получение 3 рекомендованных постов
-        return self::where('is_featured', 1)->take(3)->get();
+        return self::where('is_featured', 1)->where('status', 1)->take(3)->get();
     }
 
     public static function getNewPosts()
     {
         // получение новых постов
-        return self::orderBy('date', 'desc')->take(4)->get();
+        return self::orderBy('date', 'desc')->where('status', 1)->take(4)->get();
     }
 
     public function getComments()
