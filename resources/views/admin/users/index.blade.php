@@ -27,6 +27,7 @@
 							<tr>
 								<th>ID</th>
 								<th>Имя</th>
+								<th>Статус</th>
 								<th>E-mail</th>
 								<th>Аватар</th>
 								<th>Действия</th>
@@ -37,6 +38,7 @@
 							<tr>
 							  	<td>{{$user->id}}</td>
 							  	<td>{{$user->name}}</td>
+							  	<td>{{$user->getStatus()}}</td>
 							  	<td>{{$user->email}}</td>
 							  	<td><img src="{{$user->getAvatar()}}" alt="" class="img-responsive" width="70"></td>
 							  	<td>
@@ -45,7 +47,6 @@
 								  		<button onclick="return confirm('Удалить пользователя?')" type="submit" class="delete">
 											<i class="fa fa-remove"></i>
 								  		</button>
-
 								   	{{Form::close()}}
 							  	</td>
 							</tr>
