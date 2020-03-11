@@ -11,16 +11,22 @@
 							<div class="col-md-6">
 								<article class="post post-grid">
 									<div class="post-thumb">
-										<a href="{{route('post.show', $post->slug)}}"><img src="{{$post->getImage()}}" alt=""></a>
+										<a href="{{route('post.show', $post->slug)}}">
+											<img src="{{$post->getImage()}}" alt="">
+										</a>
 										<a href="{{route('post.show', $post->slug)}}" class="post-thumb-overlay text-center">
-										<div class="text-uppercase text-center">View Post</div>
-									  </a>
+											<div class="text-uppercase text-center">View Post</div>
+									  	</a>
 									</div>
 									<div class="post-content">
 										<header class="entry-header text-center text-uppercase">
 											@if($post->hasCategory())
-												<h6><a href="{{route('category.show', $post->category->slug)}}">{{$post->getCategoryTitle()}}</a></h6>
-												<h1 class="entry-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h1>
+												<h6>
+													<a href="{{route('category.show', $post->category->slug)}}">{{$post->getCategoryTitle()}}</a>
+												</h6>
+												<h1 class="entry-title">
+													<a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a>
+												</h1>
 											@endif
 										</header>
 										<div class="entry-content">
