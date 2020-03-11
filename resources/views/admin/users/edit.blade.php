@@ -28,6 +28,11 @@
 							<label for="exampleInputEmail1">Имя</label>
 							<input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="" value="{{$user->name}}">
 						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Статус</label>
+							<input type="text" class="form-control" id="exampleInputEmail1" name="status"placeholder="" value="{{$user->status}}">
+						</div>
 			
 						<div class="form-group">
 							<label for="exampleInputEmail1">E-mail</label>
